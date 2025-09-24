@@ -14,6 +14,12 @@ const chapters = [
   {
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1741585370/7-removebg-preview_3_mpuv5a.png",
   },
+  {
+    logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758734654/tems-removebg-preview_1_kuu4td.png",
+  },
+  {
+    logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758732350/cis-removebg-preview_xec8mh.png",
+  },
 ];
 
 const StudentBranchChapters = () => {
@@ -25,9 +31,9 @@ const StudentBranchChapters = () => {
       </div>
 
       {/* Content Wrapper */}
-      <div className="relative m-5 sm:m-10 text-black dark:text-white py-6 px-4 sm:py-10 sm:px-5 flex flex-col items-center mx-10">
+      <div className="relative m-5 sm:m-10 text-black py-6 px-4 sm:py-10 sm:px-5 flex flex-col items-center mx-10">
         {/* Title */}
-        <h1 className="text-2xl sm:text-4xl md:text-3xl font-bold text-black dark:text-white p-2 sm:p-3 text-center mb-4 whitespace-nowrap">
+        <h1 className="text-2xl sm:text-4xl md:text-3xl font-bold text-black p-2 sm:p-3 text-center mb-4 whitespace-nowrap">
           IEEE Student Branch Chapters
         </h1>
 
@@ -41,9 +47,7 @@ const StudentBranchChapters = () => {
                 width={300}
                 height={300}
                 className="w-16 h-16 sm:w-60 sm:h-60 object-contain 
-                transition duration-300 ease-in-out 
-                dark:drop-shadow-[0_0_15px_rgba(0,255,233,0.6)] 
-                dark:brightness-110"
+                transition duration-300 ease-in-out"
               />
             </div>
           ))}

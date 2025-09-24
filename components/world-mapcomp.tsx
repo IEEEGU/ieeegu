@@ -2,12 +2,12 @@ import WorldMap from "@/components/ui/world-map";
 
 export function WorldMapDemo() {
   return (
-    <div className="py-8 w-full bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="py-8 w-full bg-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto text-center">
-        <p className="font-bold md:text-4xl text-xl sm:text-3xl text-black dark:text-white text-center">
+        <p className="font-bold md:text-4xl text-xl sm:text-3xl text-black text-center">
           IEEE&apos;s GLOBAL RECOGNITION
         </p>
-        <p className="text-sm md:text-lg text-neutral-500 dark:text-neutral-400 max-w-7xl mx-auto p-8">
+        <p className="text-sm md:text-lg text-neutral-500 max-w-7xl mx-auto p-8">
           The Institute of Electrical and Electronics Engineers (IEEE) is the
           world&apos;s largest technical professional organization dedicated to
           advancing technology for humanity. With over 400,000 members in more
@@ -23,8 +23,8 @@ export function WorldMapDemo() {
       </div>
       <div className="w-full flex justify-center items-center">
         <WorldMap
-          className="w-full h-auto transition-colors duration-300 bg-white dark:bg-gray-900"
-          dotsStyle="fill-black dark:fill-white"
+          className="w-full h-auto transition-colors duration-300 bg-white"
+          dotsStyle="fill-black"
           dots={[
             { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: 34.0522, lng: -118.2437 } },
             { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: -15.7975, lng: -47.8919 } },

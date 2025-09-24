@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import { ArrowLeft, Zap, Cpu, WifiOff, } from 'lucide-react';
-import { ModeToggle } from '@/components/darktheme';
 
 const circuitLines = [
   'M10,30 L50,30 L50,50 L90,50 L90,30 L130,30 L130,70 L170,70',
@@ -18,7 +16,6 @@ const circuitLines = [
 export default function NotFoundPage() {
   const [errorCode, setErrorCode] = useState('404');
   const [blinkState, setBlinkState] = useState(true);
-  const { theme } = useTheme();
   const [showSparks, setShowSparks] = useState(false);
 
   useEffect(() => {
@@ -55,15 +52,12 @@ export default function NotFoundPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-blue-950 flex flex-col">
-      <div className="container mx-auto px-4 flex justify-end pt-6">
-        <ModeToggle />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col">
       
       <div className="flex-grow flex flex-col items-center justify-center p-6 relative overflow-hidden">
         {/* Circuit board background */}
-        <div className="absolute inset-0 overflow-hidden opacity-10 dark:opacity-20 pointer-events-none">
-          <svg width="100%" height="100%" className="stroke-blue-600 dark:stroke-blue-400">
+        <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
+          <svg width="100%" height="100%" className="stroke-blue-600">
             {circuitLines.map((path, i) => (
               <React.Fragment key={i}>
                 <path 

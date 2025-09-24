@@ -178,7 +178,7 @@ export default function RegistrationForm() {
                         <Input 
                           placeholder="Enter your full name" 
                           {...field} 
-                          className="border-slate-200 dark:text-slate-300 focus:border-slate-400 focus:ring-slate-300" 
+                          className="border-slate-200 focus:border-slate-400 focus:ring-slate-300" 
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -195,7 +195,7 @@ export default function RegistrationForm() {
                         <Input 
                           placeholder="Enter your college name" 
                           {...field} 
-                          className="border-slate-200 dark:text-slate-300 focus:border-slate-400 focus:ring-slate-300"
+                          className="border-slate-200 focus:border-slate-400 focus:ring-slate-300"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -213,7 +213,7 @@ export default function RegistrationForm() {
                           placeholder="Enter your email address" 
                           type="email" 
                           {...field} 
-                          className="border-slate-200 dark:text-slate-300 focus:border-slate-400 focus:ring-slate-300"
+                          className="border-slate-200 focus:border-slate-400 focus:ring-slate-300"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -231,7 +231,7 @@ export default function RegistrationForm() {
                           placeholder="Enter your mobile number" 
                           type="tel" 
                           {...field} 
-                          className="border-slate-200 dark:text-slate-300 focus:border-slate-400 focus:ring-slate-300"
+                          className="border-slate-200 focus:border-slate-400 focus:ring-slate-300"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -266,9 +266,9 @@ export default function RegistrationForm() {
                           <SelectValue placeholder="Select an event" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-white dark:text-slate-900 border-slate-200">
+                      <SelectContent className="bg-white border-slate-200">
                         {eventData.map((event) => (
-                          <SelectItem key={event.id} value={event.id} className="focus:bg-slate-100 dark:text-slate-900 focus:text-slate-900">
+                          <SelectItem key={event.id} value={event.id} className="focus:bg-slate-100 focus:text-slate-900">
                             {event.name} ({event.date})
                           </SelectItem>
                         ))}
@@ -376,7 +376,7 @@ export default function RegistrationForm() {
                               <Input 
                                 placeholder={`Enter team member ${index + 2} name`} 
                                 {...field} 
-                                className="border-slate-200 dark:text-slate-900 focus:border-slate-400 focus:ring-slate-300"
+                                className="border-slate-200 focus:border-slate-400 focus:ring-slate-300"
                               />
                             </FormControl>
                             <FormMessage className="text-red-500" />

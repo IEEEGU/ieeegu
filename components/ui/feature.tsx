@@ -25,9 +25,9 @@ export default function FeaturesSectionDemo() {
     
   ];
   return (
-    <div className="relative z-20 pb-5 bg-white dark:bg-neutral-900 text-left lg:py-10 mx-5 p-2 sm:p-10 text-black dark:text-white mt-10">
+    <div className="relative z-20 pb-5 bg-white text-left lg:py-10 mx-5 p-2 sm:p-10 text-black mt-10">
       <div className="px-8">
-        <p className="sm:text-sm lg:text-base max-w-7xl text-xs text-black dark:text-neutral-300 text-left sm:text-center font-normal">
+        <p className="sm:text-sm lg:text-base max-w-7xl text-xs text-black text-left sm:text-center font-normal">
           The IEEE Student Branch (SB) at Galgotias University is a vibrant community dedicated to fostering innovation, technical knowledge, and professional development among students passionate about engineering and technology. 
           The branch actively encourages research and paper presentations, providing students with opportunities to showcase their work at IEEE-sponsored events and conferences. Through guest lectures, industrial collaborations, and networking opportunities, IEEE GU SB connects students with industry professionals and the global IEEE network, helping them stay ahead in the ever-evolving technological landscape.
         </p>
@@ -36,9 +36,9 @@ export default function FeaturesSectionDemo() {
       <div className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-6 mt-6 rounded-md gap-4">
           {features.map((feature) => (
-            <FeatureCard key={feature.title} className={`${feature.className} dark:bg-neutral-800 dark:text-white`}>
+            <FeatureCard key={feature.title} className={feature.className}>
               <FeatureTitle>{feature.title}</FeatureTitle>
-              <FeatureDescription className="dark:text-neutral-300">
+              <FeatureDescription>
                 {feature.description}
               </FeatureDescription>
               <div className="h-full w-full">{feature.skeleton}</div>
@@ -52,16 +52,16 @@ export default function FeaturesSectionDemo() {
 }
 
 const FeatureTitle = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <h3 className={cn("text-lg font-semibold text-black dark:text-white", className)}>{children}</h3>
+  <h3 className={cn("text-lg font-semibold text-black", className)}>{children}</h3>
 );
 
 const FeatureDescription = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <p className={cn("text-sm text-gray-700 dark:text-neutral-300", className)}>{children}</p>
+  <p className={cn("text-sm text-gray-700", className)}>{children}</p>
 );
 
 const FeatureCard = ({ children, className }: { children?: React.ReactNode; className?: string }) => {
   return (
-    <div className={cn("p-4 sm:p-8 relative overflow-hidden bg-white dark:bg-gray-800 dark:text-white rounded-lg shadow-md", className)}>
+    <div className={cn("p-4 sm:p-8 relative overflow-hidden bg-white rounded-lg shadow-md", className)}>
       {children}
     </div>
   );
@@ -169,7 +169,7 @@ export const SkeletonTwo = () => {
             }}
             whileHover="whileHover"
             whileTap="whileTap"
-            className="rounded-xl -mr-4 mt-4 p-1 bg-white dark:bg-neutral-800 shadow-lg dark:shadow-neutral-900/50 flex-shrink-0 overflow-hidden"
+            className="rounded-xl -mr-4 mt-4 p-1 bg-white shadow-lg flex-shrink-0 overflow-hidden"
           >
             <Image
               src={image}
@@ -193,7 +193,7 @@ export const SkeletonTwo = () => {
             variants={imageVariants}
             whileHover="whileHover"
             whileTap="whileTap"
-            className="rounded-xl -mr-4 mt-4 p-1 bg-white dark:bg-neutral-800 shadow-lg dark:shadow-neutral-900/50 flex-shrink-0 overflow-hidden"
+            className="rounded-xl -mr-4 mt-4 p-1 bg-white shadow-lg flex-shrink-0 overflow-hidden"
           >
             <Image
               src={image}
@@ -217,7 +217,7 @@ export const SkeletonTwo = () => {
             }}
             whileHover="whileHover"
             whileTap="whileTap"
-            className="rounded-xl -mr-4 mt-4 p-1 bg-white dark:bg-neutral-800 shadow-lg dark:shadow-neutral-900/50 flex-shrink-0 overflow-hidden"
+            className="rounded-xl -mr-4 mt-4 p-1 bg-white shadow-lg flex-shrink-0 overflow-hidden"
           >
             <Image
               src={image}
@@ -231,8 +231,8 @@ export const SkeletonTwo = () => {
       </div>
 
       {/* Gradient Overlays */}
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white dark:from-neutral-800 to-transparent h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white dark:from-neutral-800 to-transparent h-full pointer-events-none" />
+      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-white to-transparent h-full pointer-events-none" />
+      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-white to-transparent h-full pointer-events-none" />
     </div>
   );
 };
