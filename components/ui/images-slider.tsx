@@ -1,7 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
+import Image from "next/image";
 
 export const ImagesSlider = ({
   images,
@@ -21,7 +22,8 @@ export const ImagesSlider = ({
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
@@ -35,24 +37,31 @@ export const ImagesSlider = ({
     );
   }, [images.length]);
 
+  // Preload images with better performance
   useEffect(() => {
-    const loadImages = async () => {
-      try {
-        const loadPromises = images.map(
-          (image) =>
-            new Promise<string>((resolve, reject) => {
-              const img = new Image();
-              img.src = image;
-              img.onload = () => resolve(image);
-              img.onerror = reject;
-            })
-        );
+    const loadImages = () => {
+      const loadedFlags = new Array(images.length).fill(false);
+      let loadedCount = 0;
 
-        const loaded = await Promise.all(loadPromises);
-        setLoadedImages(loaded);
-      } catch (error) {
-        console.error("Failed to load images", error);
-      }
+      images.forEach((image, index) => {
+        const img = new window.Image();
+        img.src = image;
+        img.onload = () => {
+          loadedFlags[index] = true;
+          loadedCount++;
+          if (loadedCount === images.length) {
+            setLoadedImages(loadedFlags);
+            setIsLoading(false);
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === images.length) {
+            setLoadedImages(loadedFlags);
+            setIsLoading(false);
+          }
+        };
+      });
     };
 
     loadImages();
@@ -70,7 +79,7 @@ export const ImagesSlider = ({
     window.addEventListener("keydown", handleKeyDown);
 
     let interval: NodeJS.Timeout | null = null;
-    if (autoplay) {
+    if (autoplay && !isLoading) {
       interval = setInterval(() => {
         handleNext();
       }, 5000);
@@ -80,44 +89,85 @@ export const ImagesSlider = ({
       window.removeEventListener("keydown", handleKeyDown);
       if (interval) clearInterval(interval);
     };
-  }, [autoplay, handleNext, handlePrevious]);
+  }, [autoplay, isLoading, handleNext, handlePrevious]);
 
-  const slideVariants = {
-    initial: { scale: 0, opacity: 1, rotateX: 45 },
-    visible: { scale: 1, rotateX: 0, opacity: 1, transition: { duration: 0.5, ease: [0.645, 0.045, 0.355, 1.0] } },
-    upExit: { opacity: 1, y: "-150%", transition: { duration: 1 } },
-    downExit: { opacity: 1, y: "150%", transition: { duration: 1 } },
-  };
+  const slideVariants = useMemo(() => ({
+    initial: { 
+      scale: 0.8, 
+      opacity: 0, 
+      rotateX: 45 
+    },
+    visible: { 
+      scale: 1, 
+      rotateX: 0, 
+      opacity: 1, 
+      transition: { 
+        duration: 0.5, 
+        ease: [0.645, 0.045, 0.355, 1.0] 
+      } 
+    },
+    upExit: { 
+      opacity: 0, 
+      y: "-100%", 
+      transition: { duration: 0.5 } 
+    },
+    downExit: { 
+      opacity: 0, 
+      y: "100%", 
+      transition: { duration: 0.5 } 
+    },
+  }), []);
 
-  const areImagesLoaded = loadedImages.length > 0;
+  const hasLoadedImages = loadedImages.some(Boolean) || !isLoading;
+
+  if (isLoading) {
+    return (
+      <div className={cn(
+        "relative w-full flex items-center justify-center overflow-hidden bg-gray-900",
+        "pt-[60px] pb-0 sm:pt-0",
+        className
+      )}>
+        <div className="animate-pulse bg-gray-800 w-full h-full flex items-center justify-center">
+          <div className="text-white text-lg">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       className={cn(
         "relative w-full flex items-center justify-center overflow-hidden",
-        "pt-[60px] pb-0 sm:pt-0", // Mobile: Adjust for navbar, Desktop: Fullscreen
+        "pt-[60px] pb-0 sm:pt-0",
         className
       )}
       style={{ perspective: "1000px" }}
     >
-      {areImagesLoaded && children}
-      {areImagesLoaded && overlay && <div className={cn("absolute inset-0 z-40", overlayClassName)} />}
+      {hasLoadedImages && children}
+      {hasLoadedImages && overlay && (
+        <div className={cn("absolute inset-0 z-40", overlayClassName)} />
+      )}
       
-      {areImagesLoaded && (
-        <AnimatePresence>
-          <motion.img
+      {hasLoadedImages && (
+        <AnimatePresence mode="wait">
+          <motion.div
             key={currentIndex}
-            src={loadedImages[currentIndex]}
             initial="initial"
             animate="visible"
             exit={direction === "up" ? "upExit" : "downExit"}
             variants={slideVariants}
-            className="
-              absolute inset-0 w-full h-auto 
-              max-h-[calc(100vh-60px)] sm:max-h-screen 
-              object-contain sm:object-cover
-            "
-          />
+            className="absolute inset-0"
+          >
+            <Image
+              src={images[currentIndex]}
+              alt={`Slide ${currentIndex + 1}`}
+              fill
+              className="object-contain sm:object-cover"
+              priority={currentIndex === 0}
+              quality={85}
+              sizes="(max-width: 768px) 100vw, 100vw"
+            />
+          </motion.div>
         </AnimatePresence>
       )}
     </div>

@@ -22,7 +22,7 @@ export default function BlogCard({ post, variant = 'medium', isHighlighted = fal
       <Link 
         href={`/blog/${slug}`} 
         className={`group flex flex-col h-full hover:opacity-90 transition-opacity rounded-lg ${
-          isHighlighted ? 'ring-2 ring-blue-500 dark:ring-blue-400 shadow-md' : ''
+          isHighlighted ? 'ring-2 ring-blue-500 shadow-md' : ''
         }`}
       >
         <div className="relative w-full aspect-[16/9] mb-3 overflow-hidden rounded-lg">
@@ -35,13 +35,13 @@ export default function BlogCard({ post, variant = 'medium', isHighlighted = fal
               sizes="(max-width: 768px) 100vw, 400px"
             />
           ) : (
-            <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span className="text-gray-500 dark:text-gray-400">IEEE GU</span>
+            <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-500">IEEE GU</span>
             </div>
           )}
         </div>
-        <h3 className="font-semibold text-base line-clamp-2 mb-1 text-gray-800 dark:text-gray-100">{title}</h3>
-        <div className="text-sm text-gray-600 dark:text-gray-400 mt-auto">
+        <h3 className="font-semibold text-base line-clamp-2 mb-1 text-gray-800">{title}</h3>
+        <div className="text-sm text-gray-600 mt-auto">
           {formattedDate} · {estimatedReadingTime || 3} min read
         </div>
       </Link>

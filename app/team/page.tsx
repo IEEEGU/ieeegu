@@ -164,7 +164,7 @@ const subCommunityC: TeamMember[] = [
   },
   // Add 4 more members for Sub-Community C
 ];
-const subCommunityD: TeamMember[] = [
+const subCommunityF: TeamMember[] = [
   {
     name: "Shubh Sinha",
     role: "Design Co-Lead",
@@ -194,6 +194,82 @@ const subCommunityD: TeamMember[] = [
     bio: "As Media Co-Lead of the IEEE Student Branch, Prince is responsible for managing the branch’s digital presence and media outreach. He ensures effective communication by creating engaging content, handling social media platforms, and promoting events and initiatives. His efforts enhance the visibility and engagement of the student branch within the community.",
     email: "princegmrllama@gmail.com"
   },
+];
+
+const subCommunityD: TeamMember[] = [
+  {
+    name: "Kavya Singh",
+    role: "Chairperson",
+    image: "",
+    bio: "Kavya is the Chairperson of the IEEE TEMS Student Branch Chapter, leading initiatives in Technology, Engineering and Management Society.",
+    email: "tems.chair@ieee.org"
+  },
+  {
+    name: "Saiyam Shrivastava",
+    role: "Vice Chairperson",
+    image: "",
+    bio: "Saiyam is the Vice Chairperson of the IEEE TEMS Student Branch Chapter, supporting leadership and strategic initiatives.",
+    email: "tems.vice@ieee.org"
+  },
+  {
+    name: "Yah Kumar Singh",
+    role: "Tech Lead",
+    image: "",
+    bio: "yash is Tech Lead of the IEEE TEMS Student Branch Chapter, overseeing technical projects and innovation initiatives.",
+    email: "tems.techlead@ieee.org"
+  },
+  {
+    name: "Manya Gogia",
+    role: "Secretary",
+    image: "",
+    bio: "Manya is Secretary of the IEEE TEMS Student Branch Chapter, maintaining records and facilitating communications.",
+    email: "tems.secretary@ieee.org"
+  },
+  {
+    name: "Krishna Garg",
+    role: "Treasurer",
+    image: "",
+    bio: "Krishna is Treasurer of the IEEE TEMS Student Branch Chapter, managing finances and budget planning.",
+    email: "tems.treasurer@ieee.org"
+  }
+];
+
+const subCommunityE: TeamMember[] = [
+  {
+    name: "Ansh Vashishth",
+    role: "Chairperson",
+    image: "",
+    bio: "Ansh is Chairperson of the IEEE CIS Student Branch Chapter, leading initiatives in Computational Intelligence Society.",
+    email: "cis.chair@ieee.org"
+  },
+  {
+    name: "Nalinish Ranjan",
+    role: "Vice Chairperson",
+    image: "",
+    bio: "Nalinish is Vice Chairperson of the IEEE CIS Student Branch Chapter, supporting leadership and strategic initiatives.",
+    email: "cis.vice@ieee.org"
+  },
+  {
+    name: "Khushwant Singh",
+    role: "Tech Lead",
+    image: "",
+    bio: "Khushwant is Tech Lead of the IEEE CIS Student Branch Chapter, overseeing technical projects and AI/ML initiatives.",
+    email: "cis.techlead@ieee.org"
+  },
+  {
+    name: "Aindri Tiwari",
+    role: "Secretary",
+    image: "",
+    bio: "Aindri is Secretary of the IEEE CIS Student Branch Chapter, maintaining records and facilitating communications.",
+    email: "cis.secretary@ieee.org"
+  },
+  {
+    name: "Parth Khowal",
+    role: "Treasurer",
+    image: "",
+    bio: "Parth is Treasurer of the IEEE CIS Student Branch Chapter, managing finances and budget planning.",
+    email: "cis.treasurer@ieee.org"
+  }
 ];
 
 const patCommunityA: TeamMember[] = [
@@ -401,8 +477,12 @@ export default function TeamsPage() {
             <TeamGrid members={subCommunityB} />
             <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Women In Engineering Society</h2>
             <TeamGrid members={subCommunityC} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Creative Committee</h2>
+            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Technology and Engineering Management Society</h2>
             <TeamGrid members={subCommunityD} />
+            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Computational Intelligence Society</h2>
+            <TeamGrid members={subCommunityE} />
+            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Creative Committee</h2>
+            <TeamGrid members={subCommunityF} />
 
           </TabsContent>
         </Tabs>
