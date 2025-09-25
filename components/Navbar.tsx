@@ -23,7 +23,7 @@ export default function Navbar() {
   const logo = "https://res.cloudinary.com/anurag256k/image/upload/v1735503028/IEEE/ieee-logo_ufoyaw.png"; // Light theme logo
 
   return (
-    <nav className="fixed w-full z-50 bg-white shadow-lg">
+    <nav className="fixed w-full z-50 bg-white shadow-lg font-oswald">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo - Automatically updates based on theme */}
@@ -54,10 +54,16 @@ export default function Navbar() {
                     <Link href="/cs">IEEE Computer Society</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
+                    <Link href="/wie">IEEE Women in Engineering</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link href="/ias">IEEE Industry Applications Society</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/wie">IEEE Women in Engineering</Link>
+                    <Link href="/tems">IEEE Technology & Engineering Management Society</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/cis">IEEE Computational Intelligence Society</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
@@ -89,10 +95,16 @@ export default function Navbar() {
                     <Link href="/cs">IEEE Computer Society</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
+                    <Link href="/wie">IEEE Women in Engineering</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link href="/ias">IEEE Industry Applications Society</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/wie">IEEE Women in Engineering</Link>
+                    <Link href="/tems">IEEE Technology & Engineering Management Society</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/cis">IEEE Computational Intelligence Society</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>

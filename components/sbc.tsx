@@ -15,7 +15,7 @@ const chapters = [
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1741585370/7-removebg-preview_3_mpuv5a.png",
   },
   {
-    logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758734654/tems-removebg-preview_1_kuu4td.png",
+    logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758732240/tems-removebg-preview_kp0wya.png",
   },
   {
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758732350/cis-removebg-preview_xec8mh.png",

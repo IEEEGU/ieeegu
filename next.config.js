@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ["cdn.sanity.io","res.cloudinary.com", "assets.aceternity.com","images.unsplash.com"],
+      domains: ["cdn.sanity.io","res.cloudinary.com", "assets.aceternity.com","images.unsplash.com", "via.placeholder.com"],
       formats: ['image/webp', 'image/avif'],
       minimumCacheTTL: 60,
       dangerouslyAllowSVG: true,

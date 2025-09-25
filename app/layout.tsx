@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -27,6 +27,11 @@ import {
 } from "@/components/ui/context-menu";
 import ScrollingBanner from "@/components/scrolling-banner";
 
+const oswald = Oswald({ 
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-oswald"
+});
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -41,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${oswald.variable} ${inter.className}`}>
       <Analytics/>
       <SpeedInsights/>
           <ContextMenu>

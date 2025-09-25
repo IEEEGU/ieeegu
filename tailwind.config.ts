@@ -23,6 +23,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        oswald: ["var(--font-oswald)", ...defaultTheme.fontFamily.sans],
+        sans: ["var(--font-oswald)", ...defaultTheme.fontFamily.sans],
+      },
       animation: {
         aurora: "aurora 60s linear infinite",
         first: "moveVertical 30s ease infinite",
