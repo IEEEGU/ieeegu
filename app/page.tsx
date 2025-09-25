@@ -5,10 +5,10 @@ import { ImagesSliderDemo } from "@/components/imageslider";
 import ScrollingBanner from "@/components/scrolling-banner";
 
 // Lazy load heavy components to improve initial page load
-const FeaturesSectionDemo = lazy(() => import("@/components/ui/feature"));
+const UltraLuxuryFeatures = lazy(() => import("@/components/UltraLuxuryFeatures"));
 const Intro = lazy(() => import("@/components/Intro"));
 const WorldMapDemo = lazy(() => import("@/components/world-mapcomp").then(module => ({ default: module.WorldMapDemo })));
-const StudentBranchChapters = lazy(() => import("@/components/sbc"));
+const PremiumStudentBranchChapters = lazy(() => import("@/components/PremiumStudentBranchChapters"));
 
 // Loading component
 const ComponentSkeleton = ({ height = "200px" }: { height?: string }) => (
@@ -34,11 +34,11 @@ export default function HomePage() {
             </Suspense>
 
             <Suspense fallback={<ComponentSkeleton height="300px" />}>
-                <StudentBranchChapters />
+                <PremiumStudentBranchChapters />
             </Suspense>
 
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
-                <FeaturesSectionDemo />
+                <UltraLuxuryFeatures />
             </Suspense>
 
             <Suspense fallback={<ComponentSkeleton height="600px" />}>

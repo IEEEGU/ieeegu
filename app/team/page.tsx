@@ -1,10 +1,9 @@
 'use client'
 
+import React, { useState, memo, useMemo } from 'react'
 import Image from 'next/image'
-import { Card, CardContent } from "@/components/ui/card"
+import { motion, AnimatePresence } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
 interface TeamMember {
   name: string;
@@ -12,47 +11,174 @@ interface TeamMember {
   image: string;
   bio: string;
   email: string;
+  department?: string;
+  experience?: string;
+  expertise?: string[];
+  achievements?: string[];
 }
 
+const subCommunityE: TeamMember[] = [
+  {
+    name: "Kavya Singh",
+    role: "Chairperson",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830862/Snapchat-1908667641_ubo1ap.jpg",
+    bio: "As Chairperson of IEEE TEMS, Kavya leads the Technology and Engineering Management Society, focusing on bridging the gap between technology and management. She organizes workshops and seminars on emerging technologies and their practical applications in industry.",
+    email: "kavyasingh@ieee.org",
+    department: "IEEE TEMS",
+    experience: "1+ Years in Leadership",
+    expertise: ["Technology Management", "Innovation Strategy", "Engineering Leadership"],
+  },
+  {
+    name: "Saiyam Shrivastava",
+    role: "Vice Chairperson",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830857/1000026811_t7r9xg.jpg",
+    bio: "Saiyam serves as Vice Chairperson of IEEE TEMS, supporting the chair in organizing events and managing society operations. He focuses on promoting technology management education and fostering innovation among members.",
+    email: "saiyamshrivastava@ieee.org",
+    department: "IEEE TEMS",
+    experience: "1+ Years in Technology Management",
+    expertise: ["Project Management", "Technology Strategy", "Team Leadership"],
+  },
+  {
+    name: "Yash Kumar Singh",
+    role: "Tech Lead",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830860/yash_hypwsm.jpg",
+    bio: "As Tech Lead of IEEE TEMS, Yash oversees technical initiatives and projects within the society. He organizes technical workshops, webinars, and events focused on emerging technologies and engineering management practices.",
+    email: "yashkumarsingh@ieee.org",
+    department: "IEEE TEMS",
+    experience: "1+ Years in Technology",
+    expertise: ["Technical Leadership", "Emerging Technologies", "Innovation Management"],
+  },
+  {
+    name: "Manya Gogia",
+    role: "Secretary",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830872/IMG-20250808-WA0004_ex5bnw.jpg",
+    bio: "Manya serves as Secretary of IEEE TEMS, maintaining accurate records and ensuring effective communication within the society. She coordinates with team members and manages documentation for all society activities.",
+    email: "manyagogia@ieee.org",
+    department: "IEEE TEMS",
+    experience: "1+ Years in Administration",
+    expertise: ["Documentation", "Communication", "Event Coordination"],
+  },
+  {
+    name: "Krishna Garg",
+    role: "Treasurer",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830856/IMG_20250908_150348_pozyxx.jpg",
+    bio: "As Treasurer of IEEE TEMS, Krishna manages the financial operations of the society. He handles budget planning, expense tracking, and funding allocation to support various technical and educational initiatives.",
+    email: "krishnagarg@ieee.org",
+    department: "IEEE TEMS",
+    experience: "2+ Years in Finance",
+    expertise: ["Financial Management", "Budget Planning", "Resource Allocation"],
+  }
+];
+
+const subCommunityF: TeamMember[] = [
+  {
+    name: "Ansh Vasishth",
+    role: "Chairperson",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830848/IMG_20250622_141748_212_hq4mqe.webp",
+    bio: "As Chairperson of IEEE CIS, Ansh leads the Computational Intelligence Society, focusing on artificial intelligence, machine learning, and computational intelligence technologies. He organizes cutting-edge workshops and research sessions for members.",
+    email: "anshvasishth@ieee.org",
+    department: "IEEE CIS",
+    experience: "1+ Years in AI/ML",
+    expertise: ["Artificial Intelligence", "Machine Learning", "Computational Intelligence"],
+  },
+  {
+    name: "Nalinish Ranjan",
+    role: "Vice Chairperson", 
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1741368824/NALINISH_dj3etu.png",
+    bio: "Nalinish serves as Vice Chairperson of IEEE CIS, supporting the chairperson in managing society activities and promoting computational intelligence research. He focuses on organizing technical seminars and collaborative research projects.",
+    email: "nalinishranjan@ieee.org",
+    department: "IEEE CIS",
+    experience: "1+ Years in Computational Intelligence",
+    expertise: ["Neural Networks", "Deep Learning", "Data Science"],
+  },
+  {
+    name: "Khushwant Singh",
+    role: "Tech Lead",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830876/IMG-20250724-WA0114_yru1ww.jpg",
+    bio: "As Tech Lead of IEEE CIS, Khushwant oversees technical projects and research initiatives in computational intelligence. He leads hands-on workshops on AI/ML technologies and guides members in implementing cutting-edge solutions.",
+    email: "khushwantsingh@ieee.org",
+    department: "IEEE CIS",
+    experience: "3+ Years in AI/ML Research",
+    expertise: ["Machine Learning", "AI Research", "Technical Leadership"],
+  },
+  {
+    name: "Aindri Tiwari",
+    role: "Secretary",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830877/IMG_20250924_215405_kyuldo.jpg",
+    bio: "Aindri serves as Secretary of IEEE CIS, managing documentation and communication for the society. She ensures smooth coordination of research activities and maintains records of all technical initiatives and member contributions.",
+    email: "aindritiwari@ieee.org",
+    department: "IEEE CIS",
+    experience: "2+ Years in Research Administration",
+    expertise: ["Research Documentation", "Technical Communication", "Project Coordination"],
+  },
+  {
+    name: "Parth Khowal",
+    role: "Treasurer",
+    image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758830881/IMG-20250605-WA0128_bkqs8e.jpg",
+    bio: "As Treasurer of IEEE CIS, Parth manages the financial aspects of the society, including funding for research projects and technical events. He ensures proper allocation of resources for AI/ML workshops and computational intelligence initiatives.",
+    email: "parthkhowal@ieee.org",
+    department: "IEEE CIS",
+    experience: "2+ Years in Financial Management",
+    expertise: ["Financial Planning", "Resource Management", "Budget Allocation"],
+  }
+];
 
 const boardMembers: TeamMember[] = [
-
   {
     name: "Shubhranshu S. Dash",
     role: "Chairperson",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005300/shubhranshu_hfxnd7.png",
     bio: "As Chairperson of the IEEE Student Branch, Shubhranshu leads the branch by managing operations, fostering collaboration among members, and driving initiatives that encourage technical and professional development. His leadership ensures the organization achieves its goals effectively.",
-    email: "shubhranshudash@ieee.org"
+    email: "shubhranshudash@ieee.org",
+    department: "IEEE Student Branch",
+    experience: "3+ Years in Leadership",
+    expertise: ["Strategic Leadership", "Team Management", "IEEE Operations"],
+    achievements: ["Branch Excellence Award 2024", "Outstanding Leadership Recognition"]
   },
   {
     name: "Anurag Kumar Singh",
     role: "Vice Chairperson",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005302/anurag_brdjdq.png",
     bio: "Serving as Vice Chairperson, Anurag plays a pivotal role in supporting the Chairperson and managing branch activities. He actively contributes to planning events and initiatives while ensuring smooth execution to promote member engagement.",
-    email: "aunragkumarsingh@ieee.org"
+    email: "aunragkumarsingh@ieee.org",
+    department: "IEEE Student Branch",
+    experience: "2+ Years in Leadership",
+    expertise: ["Event Management", "Strategic Planning", "Member Engagement"],
+    achievements: ["Event Excellence Award", "Leadership Development Certificate"]
   },
   {
     name: "Rashi Bajpai",
-    role: "General Sceretary",
+    role: "General Secretary",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005317/rashi_egtnjx.png",
     bio: "As Secretary of the IEEE Student Branch, Rashi is responsible for maintaining accurate records of meetings, correspondence, and events. She ensures clear communication across teams and keeps the branch organized.",
-    email: "rashibajpai@ieee.org"
+    email: "rashibajpai@ieee.org",
+    department: "IEEE Student Branch",
+    experience: "2+ Years in Administration",
+    expertise: ["Documentation", "Communication", "Administrative Management"],
+    achievements: ["Administrative Excellence Award", "Communication Skills Recognition"]
   },
   {
     name: "Manas Saxena",
     role: "Tech Lead (Web Master)",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005722/manas_2_xhetvq_c_crop_ar_9_16_gdeaww.png",
     bio: "Manas, the Technical Lead, specializes in overseeing technical projects and fostering innovation within the branch. He provides technical guidance, organizes workshops, and ensures members stay updated with the latest trends in technology.",
-    email: "manassaxena@ieee.org"
+    email: "manassaxena@ieee.org",
+    department: "IEEE Student Branch",
+    experience: "3+ Years in Technology",
+    expertise: ["Machine Learning","Research","Web Development", "Technical Leadership", "Innovation Management"],
+    achievements: ["Technical Excellence Award", "Innovation Recognition 2024"]
   },
   {
     name: "Siddharth Agrawal",
-    role: "Treasurer in General",
+    role: "Treasurer",
     image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1739005304/sidharth_de2vhl.png",
-    bio: "As Treasurer, Siddharth manages the financial operations of the IEEE Student Branch. He handles budgeting, expense tracking, and funding allocation to support the branch's activities effectively.",
-    email: "siddharthaagrawal07@ieee.org"
-  },
-  // Add 4 more board members here
+    bio: "As Treasurer, Siddharth manages the financial operations of the IEEE Student Branch. He handles budgeting, expense tracking, and funding allocation to support the branch activities effectively.",
+    email: "siddharthaagrawal07@ieee.org",
+    department: "IEEE Student Branch",
+    experience: "2+ Years in Finance",
+    expertise: ["Financial Management", "Budget Planning", "Resource Allocation"],
+    achievements: ["Financial Excellence Award", "Budget Management Recognition"]
+  }
 ];
 const subCommunityA: TeamMember[] = [
 
@@ -164,7 +290,7 @@ const subCommunityC: TeamMember[] = [
   },
   // Add 4 more members for Sub-Community C
 ];
-const subCommunityF: TeamMember[] = [
+const subCommunityD: TeamMember[] = [
   {
     name: "Shubh Sinha",
     role: "Design Co-Lead",
@@ -194,82 +320,6 @@ const subCommunityF: TeamMember[] = [
     bio: "As Media Co-Lead of the IEEE Student Branch, Prince is responsible for managing the branch’s digital presence and media outreach. He ensures effective communication by creating engaging content, handling social media platforms, and promoting events and initiatives. His efforts enhance the visibility and engagement of the student branch within the community.",
     email: "princegmrllama@gmail.com"
   },
-];
-
-const subCommunityD: TeamMember[] = [
-  {
-    name: "Kavya Singh",
-    role: "Chairperson",
-    image: "",
-    bio: "Kavya is the Chairperson of the IEEE TEMS Student Branch Chapter, leading initiatives in Technology, Engineering and Management Society.",
-    email: "tems.chair@ieee.org"
-  },
-  {
-    name: "Saiyam Shrivastava",
-    role: "Vice Chairperson",
-    image: "",
-    bio: "Saiyam is the Vice Chairperson of the IEEE TEMS Student Branch Chapter, supporting leadership and strategic initiatives.",
-    email: "tems.vice@ieee.org"
-  },
-  {
-    name: "Yah Kumar Singh",
-    role: "Tech Lead",
-    image: "",
-    bio: "yash is Tech Lead of the IEEE TEMS Student Branch Chapter, overseeing technical projects and innovation initiatives.",
-    email: "tems.techlead@ieee.org"
-  },
-  {
-    name: "Manya Gogia",
-    role: "Secretary",
-    image: "",
-    bio: "Manya is Secretary of the IEEE TEMS Student Branch Chapter, maintaining records and facilitating communications.",
-    email: "tems.secretary@ieee.org"
-  },
-  {
-    name: "Krishna Garg",
-    role: "Treasurer",
-    image: "",
-    bio: "Krishna is Treasurer of the IEEE TEMS Student Branch Chapter, managing finances and budget planning.",
-    email: "tems.treasurer@ieee.org"
-  }
-];
-
-const subCommunityE: TeamMember[] = [
-  {
-    name: "Ansh Vashishth",
-    role: "Chairperson",
-    image: "",
-    bio: "Ansh is Chairperson of the IEEE CIS Student Branch Chapter, leading initiatives in Computational Intelligence Society.",
-    email: "cis.chair@ieee.org"
-  },
-  {
-    name: "Nalinish Ranjan",
-    role: "Vice Chairperson",
-    image: "",
-    bio: "Nalinish is Vice Chairperson of the IEEE CIS Student Branch Chapter, supporting leadership and strategic initiatives.",
-    email: "cis.vice@ieee.org"
-  },
-  {
-    name: "Khushwant Singh",
-    role: "Tech Lead",
-    image: "",
-    bio: "Khushwant is Tech Lead of the IEEE CIS Student Branch Chapter, overseeing technical projects and AI/ML initiatives.",
-    email: "cis.techlead@ieee.org"
-  },
-  {
-    name: "Aindri Tiwari",
-    role: "Secretary",
-    image: "",
-    bio: "Aindri is Secretary of the IEEE CIS Student Branch Chapter, maintaining records and facilitating communications.",
-    email: "cis.secretary@ieee.org"
-  },
-  {
-    name: "Parth Khowal",
-    role: "Treasurer",
-    image: "",
-    bio: "Parth is Treasurer of the IEEE CIS Student Branch Chapter, managing finances and budget planning.",
-    email: "cis.treasurer@ieee.org"
-  }
 ];
 
 const patCommunityA: TeamMember[] = [
@@ -346,147 +396,452 @@ const patCommunityA: TeamMember[] = [
   ];
   
 
-  import { useState, useEffect } from "react";
+// Professional Team Member Modal
+const TeamMemberModal = memo(({ member, isOpen, onClose }: { 
+  member: TeamMember | null; 
+  isOpen: boolean; 
+  onClose: () => void; 
+}) => {
+  if (!member) return null;
 
-function MemberCard({ member }: { member: TeamMember }) {
   return (
-    <Dialog>
-      <DialogTrigger>
-        <Card className="bg-white dark:bg-gray-800 bg-opacity-40 backdrop-blur-md rounded-xl shadow-neumorphic hover:shadow-neumorphic-hover transition-shadow duration-300 w-800 h-96 flex flex-col justify-center">
-          <CardContent className="p-6 flex flex-col items-center">
-            <div className="w-440 h-440 rounded-full overflow-hidden mb-6 shadow-neumorphic">
-              <Image
-                src={member.image || "/placeholder.svg"}
-                alt={member.name}
-                width={176}
-                height={176}
-                className="object-cover"
-              />
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0, y: 50 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0, y: 50 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[95vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="relative bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 p-8">
+              <button
+                onClick={onClose}
+                className="absolute top-6 right-6 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 text-lg font-bold"
+              >
+                ✕
+              </button>
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+                    <Image
+                      src={member.image || "/placeholder.svg"}
+                      alt={member.name}
+                      width={128}
+                      height={128}
+                      className="w-full h-full object-cover"
+                      priority
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-white flex items-center justify-center">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-white mb-2">{member.name}</h2>
+                  <p className="text-blue-200 text-xl font-medium mb-2">{member.role}</p>
+                  {member.department && (
+                    <p className="text-blue-300 text-lg">{member.department}</p>
+                  )}
+                </div>
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-gray-200">{member.name}</h3>
-            <p className="text-blue-600 dark:text-gray-400 text-sm">{member.role}</p>
-          </CardContent>
-        </Card>
-      </DialogTrigger>
-      <DialogContent className="bg-white dark:bg-gray-900 bg-opacity-90 backdrop-blur-md rounded-xl shadow-neumorphic p-6 max-w-lg md:max-w-3xl">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-blue-900 dark:text-gray-200">{member.name}</DialogTitle>
-        </DialogHeader>
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          <div className="w-3000 h-3000 rounded-full overflow-hidden shadow-neumorphic">
-            <Image
-              src={member.image || "/placeholder.svg"}
-              alt={member.name}
-              width={700}
-              height={700}
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <p className="text-blue-600 dark:text-gray-400 font-semibold mb-2">{member.role}</p>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">{member.bio}</p>
-            <p className="text-blue-900 dark:text-gray-300">
-              <strong>Contact:</strong> {member.email}
+
+            {/* Modal Content */}
+            <div className="p-8">
+              {/* Stats Grid */}
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                {member.experience && (
+                  <div className="text-center p-6 bg-blue-50 rounded-2xl">
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white text-xl">📈</span>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2">Experience</h3>
+                    <p className="text-gray-600">{member.experience}</p>
+                  </div>
+                )}
+                <div className="text-center p-6 bg-indigo-50 rounded-2xl">
+                  <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-xl">📧</span>
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-2">Contact</h3>
+                  <p className="text-gray-600 text-sm break-all">{member.email}</p>
+                </div>
+                {member.achievements && (
+                  <div className="text-center p-6 bg-green-50 rounded-2xl">
+                    <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white text-xl">🏆</span>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2">Awards</h3>
+                    <p className="text-gray-600">{member.achievements.length} Awards</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Bio Section */}
+              <div className="bg-gray-50 rounded-2xl p-8 mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Biography</h3>
+                <p className="text-gray-700 text-lg leading-relaxed">{member.bio}</p>
+              </div>
+
+              {/* Expertise Section */}
+              {member.expertise && (
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Areas of Expertise</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {member.expertise.map((skill, index) => (
+                      <span
+                        key={index}
+                        className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Achievements Section */}
+              {member.achievements && (
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Key Achievements</h3>
+                  <div className="space-y-3">
+                    {member.achievements.map((achievement, index) => (
+                      <div key={index} className="flex items-center gap-3 p-4 bg-green-50 rounded-xl">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm">🏆</span>
+                        </div>
+                        <span className="text-gray-800 font-medium">{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Close Button */}
+              <div className="text-center">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onClose}
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Close Profile
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+});
+
+TeamMemberModal.displayName = "TeamMemberModal";
+
+// Professional Team Member Card
+const ProfessionalMemberCard = memo(({ member, index, onClick }: { 
+  member: TeamMember; 
+  index: number;
+  onClick: () => void; 
+}) => {
+  const cardVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
+  }), [index]);
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ 
+        y: -8,
+        scale: 1.03,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+      className="group relative cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+        {/* Card Header */}
+        <div className="relative p-8 pb-4">
+          <div className="flex flex-col items-center">
+            {/* Profile Image */}
+            <div className="relative mb-6">
+              <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-blue-100 shadow-xl">
+                <Image
+                  src={member.image || "/placeholder.svg"}
+                  alt={member.name}
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-3 border-white flex items-center justify-center">
+                <span className="text-white text-xs">✓</span>
+              </div>
+            </div>
+
+            {/* Name and Role */}
+            <h3 className="text-xl font-bold text-gray-900 mb-2 text-center group-hover:text-blue-600 transition-colors duration-300">
+              {member.name}
+            </h3>
+            <p className="text-blue-600 font-medium text-sm text-center mb-3">
+              {member.role}
             </p>
+            
+            {member.department && (
+              <p className="text-gray-500 text-xs text-center mb-4">
+                {member.department}
+              </p>
+            )}
+          </div>
+
+          {/* Hover Overlay */}
+          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
+              <span className="text-sm">👤</span>
+            </div>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
 
-function TeamGrid({ members }: { members: TeamMember[] }) {
+        {/* Card Footer */}
+        <div className="px-6 pb-6">
+          <div className="border-t border-gray-100 pt-4">
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-gray-500">
+                {member.experience || "IEEE Member"}
+              </div>
+              <motion.div
+                whileHover={{ x: 5 }}
+                className="text-blue-600 font-medium text-xs flex items-center gap-1 group-hover:gap-2 transition-all duration-300"
+              >
+                View Profile →
+              </motion.div>
+            </div>
+            
+            {/* Expertise Tags */}
+            {member.expertise && (
+              <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex flex-wrap gap-1">
+                  {member.expertise.slice(0, 2).map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {member.expertise.length > 2 && (
+                    <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+                      +{member.expertise.length - 2}
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
+ProfessionalMemberCard.displayName = "ProfessionalMemberCard";
+
+// Professional Team Grid Component
+const ProfessionalTeamGrid = memo(({ members, title }: { 
+  members: TeamMember[]; 
+  title?: string; 
+}) => {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
+  const handleMemberClick = (member: TeamMember) => {
+    setSelectedMember(member);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMember(null);
+  };
+
+  const containerVariants = useMemo(() => ({
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      }
+    }
+  }), []);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 ">
-      {members.map((member, index) => (
-        <MemberCard key={index} member={member} />
-      ))}
+    <div className="mb-16">
+      {title && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full" />
+        </motion.div>
+      )}
+      
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8"
+      >
+        {members.map((member, index) => (
+          <ProfessionalMemberCard
+            key={index}
+            member={member}
+            index={index}
+            onClick={() => handleMemberClick(member)}
+          />
+        ))}
+      </motion.div>
+
+      <TeamMemberModal
+        member={selectedMember}
+        isOpen={!!selectedMember}
+        onClose={handleCloseModal}
+      />
     </div>
   );
-}
+});
 
-export default function TeamsPage() {
-  const [darkMode, setDarkMode] = useState(true);
-  useEffect(() => {
-    // Local storage sirf client-side pe access karein
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "light") {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    } else {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []); // Run only once on mount
+ProfessionalTeamGrid.displayName = "ProfessionalTeamGrid";
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]); // Runs whenever darkMode changes
-
+// Main Team Page Component
+const TeamsPage = memo(() => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
-      <header className="flex justify-end p-4">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="p-2 bg-gray-200 dark:bg-gray-700 rounded-md"
-        >
-          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
-      </header>
-      <main className="container mx-auto px-4 py-16 pt-24">
-        <h1 className="text-4xl font-bold text-center text-blue-900 dark:text-gray-200 mb-12">Our Team</h1>
-        <Tabs defaultValue="board" className="w-auto mx-auto">
-        <TabsList className="grid w-auto grid-cols-3 gap-2 bg-white dark:bg-gray-900  rounded-xl p-1  ">
-  <TabsTrigger value="PAT" className="data-[state=active]:bg-white dark:bg-gray-800 data-[state=active]:text-blue-900 dark:data-[state=active]:text-gray-200 p-2 ">
-    PATRONS
-  </TabsTrigger>
-  <TabsTrigger value="board" className="data-[state=active]:bg-white dark:bg-gray-800 data-[state=active]:text-blue-900 dark:data-[state=active]:text-gray-200 p-2">
-    Board
-  </TabsTrigger>
-  <TabsTrigger value="executive" className="data-[state=active]:bg-white dark:bg-gray-800 data-[state=active]:text-blue-900 dark:data-[state=active]:text-gray-200 p-2">
-    ExComm
-  </TabsTrigger>
-</TabsList>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      {/* Hero Section */}
+      <section className="relative py-24 bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
+              Our <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Team</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+              Meet the dedicated professionals driving excellence and innovation at IEEE Galgotias University
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-          <TabsContent value="PAT">
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 text-center">PATRONS</h2>
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 ">Chief Patron</h2>
-            <TeamGrid members={patCommunityA} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-3 pt-4 ">Patrons</h2>
-            <TeamGrid members={patCommunityB} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 ">Advisors</h2>
-            <TeamGrid members={patCommunityC} />
-          </TabsContent>
-          <TabsContent value="board">
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 ">Board Team</h2>
-            <TeamGrid members={boardMembers} />
-          </TabsContent>
-          <TabsContent value="executive">
-            <h2 className="text-4xl font-bold text-center text-blue-900 dark:text-gray-200 mb-6 mt-4 ">Executive Committee</h2>
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 ">Board Team</h2>
-            <TeamGrid members={boardMembers} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4 ">Computer Society</h2>
-            <TeamGrid members={subCommunityA} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4 ">Industry Applications Society</h2>
-            <TeamGrid members={subCommunityB} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Women In Engineering Society</h2>
-            <TeamGrid members={subCommunityC} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Technology and Engineering Management Society</h2>
-            <TeamGrid members={subCommunityD} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Computational Intelligence Society</h2>
-            <TeamGrid members={subCommunityE} />
-            <h2 className="text-2xl font-semibold text-blue-900 dark:text-gray-200 mb-6 mt-4">Creative Committee</h2>
-            <TeamGrid members={subCommunityF} />
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-20">
+        <Tabs defaultValue="board" className="w-full">
+          <div className="flex justify-center mb-16">
+            <TabsList className="grid grid-cols-3 gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
+              <TabsTrigger 
+                value="PAT" 
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
+              >
+                LEADERSHIP
+              </TabsTrigger>
+              <TabsTrigger 
+                value="board" 
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
+              >
+                BOARD
+              </TabsTrigger>
+              <TabsTrigger 
+                value="executive" 
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
+              >
+                EXECUTIVE
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
+          <TabsContent value="PAT" className="space-y-16">
+            <ProfessionalTeamGrid members={patCommunityA} title="Chief Patron" />
+            <ProfessionalTeamGrid members={patCommunityB} title="Patrons" />
+            <ProfessionalTeamGrid members={patCommunityC} title="Advisors" />
+          </TabsContent>
+
+          <TabsContent value="board" className="space-y-16">
+            <ProfessionalTeamGrid members={boardMembers} title="Board Team" />
+          </TabsContent>
+
+          <TabsContent value="executive" className="space-y-16">
+            <ProfessionalTeamGrid members={boardMembers} title="Board Team" />
+            <ProfessionalTeamGrid members={subCommunityA} title="Computer Society" />
+            <ProfessionalTeamGrid members={subCommunityB} title="Industry Applications Society" />
+            <ProfessionalTeamGrid members={subCommunityC} title="Women in Engineering Society" />
+            <ProfessionalTeamGrid members={subCommunityD} title="Creative Committee" />
+            <ProfessionalTeamGrid members={subCommunityE} title="Technology and Engineering Management Society" />
+            <ProfessionalTeamGrid members={subCommunityF} title="Computational Intelligence Society" />
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900">
+        <div className="container mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Join Our Team
+            </h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Be part of our mission to advance technology, foster innovation, and create lasting impact in the engineering community
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-white text-blue-900 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Get Involved
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
-}
+});
+
+TeamsPage.displayName = "TeamsPage";
+
+export default TeamsPage;
