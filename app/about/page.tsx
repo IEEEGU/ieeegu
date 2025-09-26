@@ -427,35 +427,39 @@ export default function AboutPage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mb-8"
         >
-          <div className="bg-white rounded-3xl p-12 shadow-xl border border-gray-100">
-            <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold mb-6 text-gray-900">Contact Us</h2>
+          <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl border border-gray-100">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-gray-900">Contact Us</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
             </div>
             
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8 px-2">
                 For inquiries about IEEE Galgotias University, membership, or our events, please reach out to us. We&apos;re here to help you join our community of innovators and technology leaders.
               </p>
               
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+              <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-2xl mx-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 p-4 rounded-xl bg-gray-50">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span className="text-blue-600 text-xl">📧</span>
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm text-gray-500 uppercase tracking-wide">Email</p>
-                    <p className="text-gray-900 font-medium">ieeegusb@galgotiasuniversity.edu.in</p>
+                  <div className="text-center sm:text-left">
+                    <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wide mb-1">Email</p>
+                    <p className="text-sm sm:text-base text-gray-900 font-medium break-all">
+                      ieeegusb@galgotiasuniversity.edu.in
+                    </p>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 p-4 rounded-xl bg-gray-50">
+                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <span className="text-indigo-600 text-xl">📍</span>
                   </div>
-                  <div className="text-left">
-                    <p className="text-sm text-gray-500 uppercase tracking-wide">Office</p>
-                    <p className="text-gray-900 font-medium">Galgotias University</p>
+                  <div className="text-center sm:text-left">
+                    <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wide mb-1">Office</p>
+                    <p className="text-sm sm:text-base text-gray-900 font-medium">
+                      Galgotias University
+                    </p>
                   </div>
                 </div>
               </div>
