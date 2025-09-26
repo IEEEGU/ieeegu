@@ -392,6 +392,13 @@ const patCommunityA: TeamMember[] = [
       image: "https://res.cloudinary.com/dgna3swph/image/upload/t_Profile/v1741341173/absir_nqwekk.jpg",
       bio: "Dr. Aditya Nath Bhatt is a highly regarded academic and advisor for IEEE IAS SBC. His contributions in the domain of engineering and technology have been instrumental in shaping research initiatives and fostering a culture of technical excellence among IEEE members.",
       email: ""
+    },
+    {
+      name: "Dr. Kuldeep Singh Kaswan",
+      role: "Advisor, IEEE TEMS SBC",
+      image: "https://res.cloudinary.com/dgna3swph/image/upload/v1758886300/WhatsApp_Image_2025-09-26_at_3.05.55_PM_svt5u1.jpg",
+      bio: "Dr. Kuldeep singh kaswan is a highly regarded academic and advisor for IEEE TEMS SBC. His contributions in the domain of technology and management have been instrumental in shaping research initiatives and fostering a culture of technical excellence among IEEE members.",
+      email: ""
     }
   ];
   
@@ -630,7 +637,7 @@ const ProfessionalMemberCard = memo(({ member, index, onClick }: {
           <div className="border-t border-gray-100 pt-4">
             <div className="flex items-center justify-between">
               <div className="text-xs text-gray-500">
-                {member.experience || "IEEE Member"}
+                {member.experience || "IEEE Senior Member"}
               </div>
               <motion.div
                 whileHover={{ x: 5 }}
