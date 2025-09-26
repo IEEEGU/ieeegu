@@ -201,7 +201,7 @@ export default function UltraLuxuryFeaturesSection() {
         </motion.div>
 
         {/* Revolutionary layout grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-12">
           
           {/* Ultra-premium announcements section */}
           <div className="lg:col-span-2">
@@ -209,35 +209,35 @@ export default function UltraLuxuryFeaturesSection() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-[700px]"
+              className="relative h-[500px] sm:h-[600px] lg:h-[700px]"
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
             >
               {/* Luxury container */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl shadow-blue-500/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-xl border border-white/10 rounded-2xl lg:rounded-3xl shadow-2xl shadow-blue-500/10">
                 
                 {/* Premium header */}
-                <div className="p-8 border-b border-white/10">
+                <div className="p-4 sm:p-6 lg:p-8 border-b border-white/10">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-3xl font-light text-white mb-2">
+                      <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-white mb-2">
                         LIVE <span className="font-bold text-blue-400">ANNOUNCEMENTS</span>
                       </h2>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-green-300 text-sm font-light tracking-wider">
+                        <span className="text-green-300 text-xs sm:text-sm font-light tracking-wider">
                           REAL-TIME UPDATES
                         </span>
                       </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1.5 sm:gap-2">
                       {premiumAnnouncements.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => setActiveAnnouncement(index)}
                           title={`View announcement ${index + 1}`}
                           className={cn(
-                            "w-3 h-3 rounded-full transition-all duration-500",
+                            "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-500",
                             activeAnnouncement === index 
                               ? "bg-blue-400 scale-125 shadow-lg shadow-blue-400/50" 
                               : "bg-white/20 hover:bg-white/40"
@@ -248,8 +248,8 @@ export default function UltraLuxuryFeaturesSection() {
                   </div>
                 </div>
 
-                {/* Announcement display - 2 announcements in 2 rows */}
-                <div className="p-8 h-full overflow-hidden">
+                {/* Announcement display - responsive layout */}
+                <div className="p-4 sm:p-6 lg:p-8 h-full overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeAnnouncement}
@@ -257,45 +257,45 @@ export default function UltraLuxuryFeaturesSection() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -50, scale: 0.9 }}
                       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-6 h-full"
+                      className="space-y-4 sm:space-y-6 h-full"
                     >
                       {/* First announcement */}
-                      <div className="flex items-start gap-4 pb-6 border-b border-white/10">
-                        <div className="text-3xl">{premiumAnnouncements[activeAnnouncement].icon}</div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-start gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-white/10">
+                        <div className="text-2xl sm:text-3xl flex-shrink-0">{premiumAnnouncements[activeAnnouncement].icon}</div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                             <span className={cn(
-                              "px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase",
+                              "px-2 sm:px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase",
                               premiumAnnouncements[activeAnnouncement].priority === "high"
                                 ? "bg-red-500/20 text-red-300 border border-red-400/30"
                                 : "bg-yellow-500/20 text-yellow-300 border border-yellow-400/30"
                             )}>
                               {premiumAnnouncements[activeAnnouncement].priority} PRIORITY
                             </span>
-                            <span className="px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-medium tracking-wider uppercase">
+                            <span className="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-medium tracking-wider uppercase">
                               {premiumAnnouncements[activeAnnouncement].category}
                             </span>
                           </div>
                           
-                          <h3 className="text-xl font-light text-white mb-3 leading-tight">
+                          <h3 className="text-lg sm:text-xl font-light text-white mb-2 sm:mb-3 leading-tight">
                             {premiumAnnouncements[activeAnnouncement].title}
                           </h3>
                           
-                          <p className="text-white/80 text-base leading-relaxed mb-4 font-light">
+                          <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 font-light line-clamp-3 sm:line-clamp-none">
                             {premiumAnnouncements[activeAnnouncement].content}
                           </p>
                           
-                          <div className="flex items-center gap-4">
+                          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                             <div className="flex items-center gap-2">
                               <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
-                              <span className="text-blue-300 text-sm font-light">
+                              <span className="text-blue-300 text-xs sm:text-sm font-light">
                                 {premiumAnnouncements[activeAnnouncement].date}
                               </span>
                             </div>
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
                             >
                               Learn More
                             </motion.button>
@@ -303,12 +303,12 @@ export default function UltraLuxuryFeaturesSection() {
                         </div>
                       </div>
 
-                      {/* Second announcement */}
+                      {/* Second announcement - hide on mobile, show on larger screens */}
                       {premiumAnnouncements[(activeAnnouncement + 1) % premiumAnnouncements.length] && (
-                        <div className="flex items-start gap-4">
-                          <div className="text-3xl">{premiumAnnouncements[(activeAnnouncement + 1) % premiumAnnouncements.length].icon}</div>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-3">
+                        <div className="hidden sm:flex items-start gap-4">
+                          <div className="text-3xl flex-shrink-0">{premiumAnnouncements[(activeAnnouncement + 1) % premiumAnnouncements.length].icon}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-3 mb-3">
                               <span className={cn(
                                 "px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase",
                                 premiumAnnouncements[(activeAnnouncement + 1) % premiumAnnouncements.length].priority === "high"
