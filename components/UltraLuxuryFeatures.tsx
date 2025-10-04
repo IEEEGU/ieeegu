@@ -76,42 +76,42 @@ const premiumAnnouncements = [
 const luxuryEvents = [
   {
     id: 1,
-    title: "IEEE Day 2025 Tech Expo",
+    title: "IEEE Day 2025",
     image: "/api/placeholder/400/300",
     description: "Week-long celebration showcase",
-    attendees: 800,
-    rating: 4.9
-  },
-  {
-    id: 2,
-    title: "TEMS Synapse Summit",
-    image: "/api/placeholder/400/300", 
-    description: "Technology management excellence",
-    attendees: 450,
-    rating: 4.8
-  },
-  {
-    id: 3,
-    title: "CIS AI Innovation Lab",
-    image: "/api/placeholder/400/300",
-    description: "Computational intelligence workshop",
     attendees: 300,
     rating: 4.9
   },
   {
+    id: 2,
+    title: "TEMS Synapse",
+    image: "/api/placeholder/400/300", 
+    description: "Technology management excellence",
+    attendees: 150,
+    rating: 4.8
+  },
+  {
+    id: 3,
+    title: "CIS Salesforce Workshop",
+    image: "/api/placeholder/400/300",
+    description: "Computational intelligence workshop",
+    attendees: 200,
+    rating: 4.9
+  },
+  {
     id: 4,
-    title: "WiE Leadership Conclave",
+    title: "CS AICSSYC 2024",
     image: "/api/placeholder/400/300",
     description: "Women in engineering empowerment",
-    attendees: 350,
+    attendees: 500,
     rating: 4.8
   },
   {
     id: 5,
-    title: "IAS Industry Connect",
+    title: "IAS Cup",
     image: "/api/placeholder/400/300",
     description: "Industrial applications showcase",
-    attendees: 500,
+    attendees: 50,
     rating: 4.7
   },
   {

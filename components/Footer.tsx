@@ -28,7 +28,7 @@ export default function Footer() {
       name: 'Twitter',
       href: 'https://x.com/ieeegusb',
       icon: Twitter,
-      color: 'from-blue-400 to-blue-600'
+      color: 'from-blue-500 to-blue-700'
     },
     {
       name: 'LinkedIn',
@@ -60,22 +60,21 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { icon: Mail, text: 'ieee@galgotiasuniversity.edu.in' },
-    { icon: Phone, text: '+91 (120) 471-4800' },
+    { icon: Mail, text: 'ieeegusb@galgotiasuniversity.edu.in' },
     { icon: MapPin, text: 'Galgotias University, Greater Noida' }
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
-      {/* Animated background elements */}
+    <footer className="relative bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 text-gray-800 overflow-hidden border-t-2 border-blue-300">
+      {/* Subtle background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-0 w-64 h-64 bg-blue-300/20 rounded-full blur-2xl"></div>
       </div>
 
       {/* Decorative top border */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-400"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600"></div>
 
       <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
@@ -91,7 +90,7 @@ export default function Footer() {
               className="space-y-6"
             >
               {/* Logo group */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -101,7 +100,7 @@ export default function Footer() {
                     alt="IEEE Logo"
                     width={140}
                     height={90}
-                    className="h-20 w-auto"
+                    className="h-10 lg:h-14 w-auto"
                   />
                 </motion.div>
                 <motion.div
@@ -113,7 +112,7 @@ export default function Footer() {
                     alt="IEEE GU Logo"
                     width={120}
                     height={70}
-                    className="h-16 w-auto"
+                    className="h-8 lg:h-12 w-auto"
                   />
                 </motion.div>
                 <motion.div
@@ -125,17 +124,17 @@ export default function Footer() {
                     alt="Galgotias University Logo"
                     width={120}
                     height={100}
-                    className="h-20 w-auto"
+                    className="h-10 lg:h-14 w-auto"
                   />
                 </motion.div>
               </div>
 
               {/* Description */}
               <div className="text-center lg:text-left max-w-md mx-auto lg:mx-0">
-                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
                   IEEE Student Branch
                 </h3>
-                <p className="text-blue-100 leading-relaxed mb-6">
+                <p className="text-gray-700 leading-relaxed mb-6 font-medium">
                   Empowering students through technology, innovation, and professional development. 
                   Join the world&apos;s largest technical community and shape the future.
                 </p>
@@ -172,8 +171,8 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-              <Sparkles className="w-5 h-5 text-blue-400" />
-              <h3 className="text-xl font-bold text-white">Quick Links</h3>
+              <Sparkles className="w-5 h-5 text-blue-600" />
+              <h3 className="text-xl font-bold text-gray-800">Quick Links</h3>
             </div>
             <div className="space-y-3">
               {quickLinks.map((link, index) => (
@@ -186,9 +185,9 @@ export default function Footer() {
                 >
                   <Link
                     href={link.href}
-                    className="group flex items-center space-x-2 text-blue-200 hover:text-white transition-all duration-300"
+                    className="group flex items-center space-x-2 text-gray-600 hover:text-blue-700 transition-all duration-300 font-medium"
                   >
-                    <div className="w-1 h-1 bg-blue-400 rounded-full group-hover:w-2 group-hover:bg-white transition-all duration-300"></div>
+                    <div className="w-1 h-1 bg-blue-500 rounded-full group-hover:w-2 group-hover:bg-blue-700 transition-all duration-300"></div>
                     <span className="group-hover:translate-x-1 transition-transform duration-300">
                       {link.name}
                     </span>
@@ -210,14 +209,14 @@ export default function Footer() {
             {/* Contact Info */}
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <Mail className="w-5 h-5 text-blue-400" />
-                <h3 className="text-xl font-bold text-white">Contact</h3>
+                <Mail className="w-5 h-5 text-blue-600" />
+                <h3 className="text-xl font-bold text-gray-800">Contact</h3>
               </div>
               <div className="space-y-3">
                 {contactInfo.map((contact, index) => (
-                  <div key={index} className="flex items-center space-x-3 text-blue-200">
-                    <contact.icon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                    <span className="text-sm">{contact.text}</span>
+                  <div key={index} className="flex items-center space-x-3 text-gray-600">
+                    <contact.icon className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                    <span className="text-sm font-medium">{contact.text}</span>
                   </div>
                 ))}
               </div>
@@ -225,13 +224,13 @@ export default function Footer() {
 
             {/* Legal Links */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Legal</h4>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4">Legal</h4>
               <div className="space-y-2">
                 {legalLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="block text-sm text-blue-200 hover:text-white transition-colors duration-300"
+                    className="block text-sm text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium"
                   >
                     {link.name}
                   </Link>
@@ -247,22 +246,22 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="pt-8 border-t border-white/10"
+          className="pt-8 border-t border-blue-300"
         >
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="text-center lg:text-left">
-              <p className="text-blue-200 text-sm">
+              <p className="text-gray-600 text-sm font-medium">
                 © {new Date().getFullYear()} IEEE Student Branch, Galgotias University. All rights reserved.
               </p>
-              <p className="text-blue-300/80 text-xs mt-1">
+              <p className="text-gray-500 text-xs mt-1">
                 Advancing technology for humanity • Inspiring innovation • Building tomorrow
               </p>
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-xs text-blue-300/80">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Live since 2024</span>
+              <div className="flex items-center space-x-2 text-xs text-gray-500">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="font-medium">Live since 2024</span>
               </div>
               
               {/* Scroll to top button */}
@@ -273,7 +272,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={scrollToTop}
-                  className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="p-2 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                   aria-label="Scroll to top"
                 >
                   <ArrowUp className="w-4 h-4 text-white" />
