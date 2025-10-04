@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Mail, Award, Users, ChevronRight, Globe, BookOpen, Trophy } from 'lucide-react';
+import { Award, Users, ChevronRight, Globe, BookOpen, Trophy } from 'lucide-react';
 
 interface LeadershipMember {
   name: string;
@@ -129,11 +129,11 @@ export default function ComputerSocietyPage() {
                     className="object-contain"
                   />
                 </div> */}
-                <span className="text-base font-medium">GALGOTIAS UNIVERSITY</span>
+                <span className="text-base font-medium">IEEE GALGOTIAS UNIVERSITY</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-                IEEE COMPUTER
+                COMPUTER
                 <span className="block bg-gradient-to-r from-amber-200 via-yellow-200 to-white bg-clip-text text-transparent">
                   SOCIETY
                 </span>
@@ -364,13 +364,6 @@ export default function ComputerSocietyPage() {
                   <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
                     {member.bio}
                   </p>
-                  <a 
-                    href={`mailto:${member.email}`}
-                    className="inline-flex items-center gap-2 text-yellow-600 hover:text-yellow-700 font-medium text-sm transition-colors duration-300 bg-yellow-50 hover:bg-yellow-100 px-4 py-2 rounded-full"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Contact
-                  </a>
                 </div>
               </motion.div>
             ))}

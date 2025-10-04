@@ -25,7 +25,6 @@ import {
   ContextMenuSubTrigger,
   ContextMenuSubContent,
 } from "@/components/ui/context-menu";
-import ScrollingBanner from "@/components/scrolling-banner";
 
 const oswald = Oswald({ 
   subsets: ["latin"],
@@ -53,7 +52,6 @@ export default function RootLayout({
             <ContextMenuTrigger>
               <Navbar />
               <main className="bg-white">{children}</main>
-              <ScrollingBanner />
               <Footer />
             </ContextMenuTrigger>
             <ContextMenuContent className="w-64 bg-gradient-to-br from-[#f0f8ff] to-[#e6f3ff] text-[#005580] rounded-lg shadow-lg">
