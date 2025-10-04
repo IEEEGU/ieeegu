@@ -22,6 +22,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const logo = "https://res.cloudinary.com/anurag256k/image/upload/v1735503028/IEEE/ieee-logo_ufoyaw.png"; // Light theme logo
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="fixed w-full z-50 bg-white shadow-lg font-oswald">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,26 +48,45 @@ export default function Navbar() {
             {/* Dropdown Menu for Societies */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="bg-blue-500 text-white hover:bg-blue-600">Societies</Button>
+                <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold px-6 py-2 rounded-lg">
+                  Societies
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>OUR SOCIETIES</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+              <DropdownMenuContent className="w-80 bg-white border border-gray-200 shadow-2xl rounded-xl p-2">
+                <DropdownMenuLabel className="text-gray-600 font-bold text-xs uppercase tracking-wider px-3 py-2">
+                  OUR SOCIETIES
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-gray-200 my-2" />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <Link href="/cs">IEEE Computer Society</Link>
+                  <DropdownMenuItem asChild className="group">
+                    <Link href="/cs" className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 transition-all duration-300 cursor-pointer">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-800 font-medium group-hover:text-yellow-700">IEEE Computer Society</span>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/wie">IEEE Women in Engineering</Link>
+                  <DropdownMenuItem asChild className="group">
+                    <Link href="/wie" className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 cursor-pointer">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-800 font-medium group-hover:text-purple-700">IEEE Women in Engineering</span>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/ias">IEEE Industry Applications Society</Link>
+                  <DropdownMenuItem asChild className="group">
+                    <Link href="/ias" className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-300 cursor-pointer">
+                      <div className="w-2 h-2 bg-green-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-800 font-medium group-hover:text-green-700">IEEE Industry Applications Society</span>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/tems">IEEE Technology & Engineering Management Society</Link>
+                  <DropdownMenuItem asChild className="group">
+                    <Link href="/tems" className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 cursor-pointer">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-800 font-medium group-hover:text-blue-700">IEEE Technology & Engineering Management Society</span>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/cis">IEEE Computational Intelligence Society</Link>
+                  <DropdownMenuItem asChild className="group">
+                    <Link href="/cis" className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-cyan-50 hover:to-teal-50 transition-all duration-300 cursor-pointer">
+                      <div className="w-2 h-2 bg-cyan-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-800 font-medium group-hover:text-cyan-700">IEEE Computational Intelligence Society</span>
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
@@ -81,37 +104,64 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button className="bg-gray-300 text-black hover:bg-gray-400">Societies</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>OUR SOCIETIES</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem asChild>
-                    <Link href="/cs">IEEE Computer Society</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/wie">IEEE Women in Engineering</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/ias">IEEE Industry Applications Society</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/tems">IEEE Technology & Engineering Management Society</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/cis">IEEE Computational Intelligence Society</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
+          <div className="px-4 pt-4 pb-4 space-y-2">
+            {/* Mobile Societies Dropdown */}
+            <div className="mb-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold py-3 rounded-lg">
+                    Societies
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-80 bg-white border border-gray-200 shadow-2xl rounded-xl p-2" align="start">
+                  <DropdownMenuLabel className="text-gray-600 font-bold text-xs uppercase tracking-wider px-3 py-2">
+                    OUR SOCIETIES
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-gray-200 my-2" />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem asChild className="group">
+                      <Link href="/cs" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-yellow-50 hover:to-orange-50 transition-all duration-300 cursor-pointer">
+                        <div className="w-2 h-2 bg-yellow-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                        <span className="text-gray-800 font-medium group-hover:text-yellow-700">IEEE Computer Society</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="group">
+                      <Link href="/wie" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300 cursor-pointer">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                        <span className="text-gray-800 font-medium group-hover:text-purple-700">IEEE Women in Engineering</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="group">
+                      <Link href="/ias" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-green-50 hover:to-emerald-50 transition-all duration-300 cursor-pointer">
+                        <div className="w-2 h-2 bg-green-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                        <span className="text-gray-800 font-medium group-hover:text-green-700">IEEE Industry Applications Society</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="group">
+                      <Link href="/tems" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 cursor-pointer">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                        <span className="text-gray-800 font-medium group-hover:text-blue-700">IEEE Technology & Engineering Management Society</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="group">
+                      <Link href="/cis" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-cyan-50 hover:to-teal-50 transition-all duration-300 cursor-pointer">
+                        <div className="w-2 h-2 bg-cyan-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                        <span className="text-gray-800 font-medium group-hover:text-cyan-700">IEEE Computational Intelligence Society</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
             {navItems.map((item) => (
-              <Link key={item.name} href={item.href} className="text-black hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsOpen(false)}>
+              <Link 
+                key={item.name} 
+                href={item.href} 
+                className="text-gray-800 hover:bg-gray-100 hover:text-blue-600 block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 border border-transparent hover:border-gray-200" 
+                onClick={closeMobileMenu}
+              >
                 {item.name}
               </Link>
             ))}

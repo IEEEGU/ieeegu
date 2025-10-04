@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Mail, Award, Users, Globe, BookOpen, Trophy, Zap, Cog, Settings } from 'lucide-react';
+import { Award, Users, Globe, BookOpen, Trophy, Zap, Cog, Settings } from 'lucide-react';
 
 interface LeadershipMember {
   name: string;
@@ -288,16 +288,6 @@ export default function IndustryApplicationsSocietyPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
                   <p className="text-green-600 font-medium mb-3">{member.role}</p>
                   <p className="text-gray-600 text-sm leading-relaxed mb-4">{member.bio}</p>
-                  
-                  {member.email && (
-                    <a 
-                      href={`mailto:${member.email}`}
-                      className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 text-sm font-medium transition-colors"
-                    >
-                      <Mail className="w-4 h-4" />
-                      Contact
-                    </a>
-                  )}
                 </div>
               </motion.div>
             ))}
