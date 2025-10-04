@@ -14,7 +14,7 @@ const eliteChapters = [
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1741585370/8-removebg-preview_dfvg0l.png",
     description: "Advancing computing technology for humanity through innovation, research, and professional development in all areas of computing.",
     focus: ["Artificial Intelligence", "Software Engineering", "Cybersecurity", "Data Science"],
-    members: 70,
+    members: 60,
     color:  "from-orange-600 to-red-700",
     accent: "yellow",
     established: "2024"
@@ -38,7 +38,7 @@ const eliteChapters = [
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1741585370/7-removebg-preview_3_mpuv5a.png",
     description: "Bridging the gap between industrial applications and cutting-edge research in power systems, automation, and control.",
     focus: ["Leadership Development", "Career Advancement", "STEM Education", "Gender Equality"],
-    members:70,
+    members: 40,
     color: "from-purple-600 to-pink-700",
     accent: "purple",
     established: "2024"
@@ -62,7 +62,7 @@ const eliteChapters = [
     logo: "https://res.cloudinary.com/dgna3swph/image/upload/v1758732350/cis-removebg-preview_xec8mh.png",
     description: "Exploring the frontiers of computational intelligence through neural networks, fuzzy systems, and evolutionary computation.",
     focus: ["Neural Networks", "Machine Learning", "Fuzzy Systems", "Evolutionary Algorithms"],
-    members: 25,
+    members: 30,
     color: "from-cyan-600 to-teal-700",
     accent: "cyan",
     established: "2025"
